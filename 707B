@@ -1,0 +1,33 @@
+//707B
+#include<bits/stdc++.h>
+using namespace std;
+int n,m,k;
+int edges[100003][3];
+bool viisit[100003];
+int main(){
+	int i,j,tmp1,tmp2,tmp3,ans = 1000000005;
+	scanf("%d %d %d",&n,&m,&k);
+	for(i=1;i<=m;i++){
+		scanf("%d %d %d",&tmp1,&tmp2,&tmp3);
+		edges[i][0] = tmp1;
+		edges[i][1] = tmp2;
+		edges[i][2] = tmp3;
+	}
+	for(i=1;i<=k;i++){
+		scanf("%d ",&tmp1);
+		viisit[tmp1] = 1;
+	}
+	for(i=1;i<=m;i++){
+		if(viisit[edges[i][0]] == 1 && viisit[edges[i][1]] == 0){
+			ans = min(ans,edges[i][2]);
+		}
+		if(viisit[edges[i][0]] == 0 && viisit[edges[i][1]] == 1){
+			ans = min(ans,edges[i][2]);
+		}
+	}
+	if(ans == 1000000005){
+		printf("%d\n",-1);
+	}
+	else printf("%d\n",ans);
+	return 0;
+}
